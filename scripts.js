@@ -25,6 +25,8 @@ function alertar(event){
         .then(resposta=>resposta.json())
         .then(dados=>alert(dados.logradouro))
 
+        .catch ((e) => alert(e.message()))
+
         saida.innerText = `Nome:  ${nome.value} 
                            Email: ${email.value}
                            Telefone: ${tel.value}
