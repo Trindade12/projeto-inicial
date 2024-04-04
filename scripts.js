@@ -19,13 +19,39 @@ function alertar(event){
     if(true){
         //alert("Você Clicou no Botão!!!" + "" + nome.value);
 
+        //validação
+        if(cep.value.length < 8){
+            alert("Entre com um CEP válido")
+        }
+
         const url = `https://viacep.com.br/ws/${cep.value}/json/`;
 
         fetch(url)
+
+        //versão verbosa sem arrow function
+        .then(function(resposta){
+            return resposta.json();
+        })
+
+        .then(function(dados){
+            logradouro.value = dados.logradouro;
+            bairro.value = dados.bairro;
+            cidade.value = dados.localidade;
+            complemento.value = dados.complemento;
+            estado.value = dados.uf;
+        })
+
+        .catch(function(error){
+            alert(error.message);
+        })
+
+        //versão menos verbosa com arrow function
+
+        /*fetch(url)
         .then(resposta=>resposta.json())
         .then(dados=>alert(dados.logradouro))
 
-        .catch ((e) => alert(e.message()))
+        .catch ((e) => alert(e.message()))*/
 
         saida.innerText = `Nome:  ${nome.value} 
                            Email: ${email.value}
